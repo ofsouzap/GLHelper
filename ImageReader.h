@@ -16,8 +16,15 @@ namespace GLHelper
 
 	constexpr int BMP_HEADER_SIZE = 54;
 
-	class FileNotBMPFileException : exception { };
-	
-	ImageData* readBMPImage(string filename);
+	class ImageReader
+	{
+
+	public:
+
+		class FileNotBMPFileException : exception { };
+
+		static ImageData* readBMPImage(string filename);
+
+	};
 
 }

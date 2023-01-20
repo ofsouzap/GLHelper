@@ -5,7 +5,7 @@ using namespace GLHelper;
 // Created with help from http://www.opengl-tutorial.org/beginners-tutorials/tutorial-5-a-textured-cube/
 // File format reference: https://en.wikipedia.org/wiki/BMP_file_format
 
-ImageData* GLHelper::readBMPImage(string filename)
+ImageData* ImageReader::readBMPImage(string filename)
 {
 
 	// Setup

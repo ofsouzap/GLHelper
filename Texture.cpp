@@ -31,7 +31,7 @@ Texture* Texture::fromBMP(string filename)
 	Texture* texture;
 
 	// Read image data
-	ImageData* image = readBMPImage(filename);
+	ImageData* image = ImageReader::readBMPImage(filename);
 
 	// Create texture from loaded image data
 	texture = new Texture(image);

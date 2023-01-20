@@ -16,3 +16,20 @@ string* FileReader::readFile(string const filename)
 	return contents;
 
 }
+
+vector<string> FileReader::readFileLines(string filename)
+{
+
+	vector<string> lines = vector<string>();
+
+	ifstream ifs = ifstream(filename);
+
+	string line;
+	while (std::getline(ifs, line))
+		lines.push_back(line);
+
+	ifs.close();
+
+	return lines;
+
+}
