@@ -159,11 +159,11 @@ int main()
 
 	// Load model
 
-	int vertCount;
+	int vertexCount;
 	GLfloat* objPos;
 	GLfloat* objUV;
 	GLfloat* objNorm;
-	ModelReader::readOBJModel("monkey.obj", &vertCount, &objPos, &objUV, &objNorm);
+	ModelReader::readOBJModel("monkey.obj", &vertexCount, &objPos, &objUV, &objNorm);
 
 	// Load texture
 	Texture* texture = Texture::fromBMP("monkey_texture.bmp");
@@ -172,7 +172,9 @@ int main()
 	ShaderProgram shader("vertex_shader_textured.glsl", "frag_shader_textured.glsl");
 
 	// Create scene object and set its texture
-	SceneObject obj(&shader, vertCount, objPos, nullptr, objUV);
+	SceneObject obj(&shader, vertexCount);
+	obj.addAttrib("oc_pos", GL_FLOAT, sizeof(GLfloat), 3, objPos);
+	obj.addAttrib("uv", GL_FLOAT, sizeof(GLfloat), 2, objUV);
 	obj.setTexture(texture);
 
 #pragma endregion

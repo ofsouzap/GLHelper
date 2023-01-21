@@ -38,6 +38,16 @@ GLuint ShaderProgram::createShaderProgram(GLuint vertexShader, GLuint fragmentSh
 
 }
 
+GLint GLHelper::ShaderProgram::getAttribLocation(string name) const
+{
+	return glGetAttribLocation(program, name.c_str());
+}
+
+GLint ShaderProgram::getUniformLocation(string name) const
+{
+	return glGetUniformLocation(program, name.c_str());
+}
+
 ShaderProgram::ShaderProgram(string vertexShaderFilename, string fragmentShaderFilename)
 {
 
@@ -48,58 +58,26 @@ ShaderProgram::ShaderProgram(string vertexShaderFilename, string fragmentShaderF
 	fragmentShader = createFragmentShader(fragmentShaderText);
 	program = createShaderProgram(vertexShader, fragmentShader);
 
-	mvp = glGetUniformLocation(program, "mvp");
-	vPos = glGetAttribLocation(program, "vPos");
-	vCol = glGetAttribLocation(program, "vCol");
-	vUV = glGetAttribLocation(program, "vUV");
-
 }
 
-void ShaderProgram::bindPos()
+void ShaderProgram::bindVertexData(string name, GLint size, GLenum type, GLsizei stride, GLboolean normalized) const
 {
 
-	const GLint size = 3;
-	const GLenum type = GL_FLOAT;
-	const GLsizei stride = sizeof(GLfloat) * size;
-	const void* pointer = 0;
-
-	glEnableVertexAttribArray(vPos);
-	glVertexAttribPointer(vPos, size, type, GL_FALSE, stride, pointer);
+	GLint attrib = getAttribLocation(name);
+	glEnableVertexAttribArray(attrib);
+	glVertexAttribPointer(attrib, size, type, normalized, stride, (const void*)0);
 
 }
 
-void ShaderProgram::bindCol()
+void ShaderProgram::setUniformMat4x4(string name, const GLfloat* value) const
 {
 
-	const GLint size = 3;
-	const GLenum type = GL_FLOAT;
-	const GLsizei stride = sizeof(GLfloat) * size;
-	const void* pointer = 0;
-
-	glEnableVertexAttribArray(vCol);
-	glVertexAttribPointer(vCol, size, type, GL_FALSE, stride, pointer);
+	GLint attrib = getUniformLocation(name);
+	glUniformMatrix4fv(attrib, 1, GL_FALSE, value);
 
 }
 
-void ShaderProgram::bindUV()
-{
-
-	const GLint size = 2;
-	const GLenum type = GL_FLOAT;
-	const GLsizei stride = sizeof(GLfloat) * size;
-	const void* pointer = 0;
-
-	glEnableVertexAttribArray(vUV);
-	glVertexAttribPointer(vUV, size, type, GL_FALSE, stride, pointer);
-
-}
-
-void ShaderProgram::usage_useProgram() const
+void ShaderProgram::useProgram() const
 {
 	glUseProgram(program);
-}
-
-void ShaderProgram::usage_provideMvp(const GLfloat* value) const
-{
-	glUniformMatrix4fv(mvp, 1, GL_FALSE, value);
 }
