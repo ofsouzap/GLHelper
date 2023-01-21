@@ -58,6 +58,9 @@ ImageData* ImageReader::readBMPImage(string filename)
 
 	fclose(file);
 
+	unsigned char tmp[4 * 3] = {};
+	std::copy(data, data + 12, tmp);
+
 	// Create image object
 
 	img = new ImageData(width, height, data);
