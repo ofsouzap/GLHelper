@@ -1,0 +1,3 @@
+- Create own linmath library or find a library which works better (eg. need mat3x3 for normal modelling matrices)
+- Improve image reader or (probably better) find a library to do it instead
+- Improve model reader or (probably better) find a library to do it instead
