@@ -38,14 +38,39 @@ GLuint ShaderProgram::createShaderProgram(GLuint vertexShader, GLuint fragmentSh
 
 }
 
-GLint GLHelper::ShaderProgram::getAttribLocation(string name) const
+GLint ShaderProgram::getAttribLocation(string name) const
 {
 	return glGetAttribLocation(program, name.c_str());
 }
 
 GLint ShaderProgram::getUniformLocation(string name) const
 {
-	return glGetUniformLocation(program, name.c_str());
+
+	GLint attrib;
+
+	auto res = uniformLocCache->find(name);
+
+	if (res == uniformLocCache->end())
+	{
+
+		// Not found in cache. Find and add to cache
+
+		attrib = glGetUniformLocation(program, name.c_str());
+
+		uniformLocCache->insert(pair<string, GLint>(name, attrib));
+
+	}
+	else
+	{
+
+		// Found in cache. Use value found
+
+		attrib = (*res).second;
+
+	}
+
+	return attrib;
+
 }
 
 ShaderProgram::ShaderProgram(string vertexShaderFilename, string fragmentShaderFilename)
@@ -58,6 +83,13 @@ ShaderProgram::ShaderProgram(string vertexShaderFilename, string fragmentShaderF
 	fragmentShader = createFragmentShader(fragmentShaderText);
 	program = createShaderProgram(vertexShader, fragmentShader);
 
+	uniformLocCache = new map<const string, const GLint>();
+
+}
+
+ShaderProgram::~ShaderProgram()
+{
+	delete uniformLocCache;
 }
 
 void ShaderProgram::bindVertexData(string name, GLint size, GLenum type, GLsizei stride, GLboolean normalized) const

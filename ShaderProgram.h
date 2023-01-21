@@ -1,9 +1,12 @@
 #pragma once
 
 #include <string>
+#include <map>
 #include <glad/gl.h>
 
 using std::string;
+using std::map;
+using std::pair;
 
 namespace GLHelper
 {
@@ -15,11 +18,11 @@ namespace GLHelper
 		GLuint vertexShader, fragmentShader;
 		GLuint program;
 
+		map<const string, const GLint>* uniformLocCache;
+
 		static GLuint createVertexShader(const char* vertexShaderText);
 		static GLuint createFragmentShader(const char* fragmentShaderText);
 		static GLuint createShaderProgram(GLuint vertexShader, GLuint fragmentShader);
-
-		// TODO - cache fetched shader program attribute locations so that don't have to be fetched each frame
 
 		GLint getAttribLocation(string name) const;
 		GLint getUniformLocation(string name) const;
@@ -27,6 +30,7 @@ namespace GLHelper
 	public:
 
 		ShaderProgram(string vertexShaderFilename, string fragmentShaderFilename);
+		~ShaderProgram();
 
 		/// <summary>
 		/// Binds vertex data provided from a data array to an "in" attribute in the shader program
