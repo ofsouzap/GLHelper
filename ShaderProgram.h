@@ -36,8 +36,14 @@ namespace GLHelper
 		/// <param name="type">The type of the values being provided (eg. GL_FLOAT)</param>
 		/// <param name="stride">The number of bytes each value takes (eg. the stride for a vec3 would be sizeof(float) * 3)</param>
 		void bindVertexData(string name, GLint size, GLenum type, GLsizei stride, GLboolean normalized = false) const;
+
 		void setUniformMat4x4(string name, const GLfloat* value) const;
-		// TODO - once tested main things, add setting functions for other data types
+		void setUniformVec3(string name, const GLfloat* value) const;
+		void setUniformVec3i(string name, const GLint* value) const;
+		void setUniformVec2(string name, const GLfloat* value) const;
+		void setUniformVec2i(string name, const GLint* value) const;
+		void setUniformFloat(string name, const GLfloat* value) const;
+		void setUniformInt(string name, const GLint* value) const;
 
 		void useProgram() const;
 

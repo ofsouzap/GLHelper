@@ -77,6 +77,54 @@ void ShaderProgram::setUniformMat4x4(string name, const GLfloat* value) const
 
 }
 
+void ShaderProgram::setUniformVec3(string name, const GLfloat* value) const
+{
+
+	GLint attrib = getUniformLocation(name);
+	glUniform3fv(attrib, 1, value);
+
+}
+
+void ShaderProgram::setUniformVec3i(string name, const GLint* value) const
+{
+
+	GLint attrib = getUniformLocation(name);
+	glUniform3iv(attrib, 1, value);
+
+}
+
+void ShaderProgram::setUniformVec2(string name, const GLfloat* value) const
+{
+
+	GLint attrib = getUniformLocation(name);
+	glUniform2fv(attrib, 1, value);
+
+}
+
+void ShaderProgram::setUniformVec2i(string name, const GLint* value) const
+{
+
+	GLint attrib = getUniformLocation(name);
+	glUniform2iv(attrib, 1, value);
+
+}
+
+void ShaderProgram::setUniformFloat(string name, const GLfloat* value) const
+{
+
+	GLint attrib = getUniformLocation(name);
+	glUniform1fv(attrib, 1, value);
+
+}
+
+void ShaderProgram::setUniformInt(string name, const GLint* value) const
+{
+
+	GLint attrib = getUniformLocation(name);
+	glUniform1iv(attrib, 1, value);
+
+}
+
 void ShaderProgram::useProgram() const
 {
 	glUseProgram(program);
