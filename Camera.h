@@ -1,7 +1,11 @@
 #pragma once
 
 #include <glad/gl.h>
-#include <linmath.h>
+#include <glm/mat4x4.hpp>
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
+
+using glm::mat4x4;
 
 namespace GLHelper
 {
@@ -38,7 +42,7 @@ namespace GLHelper
 		void setAngles(angles as);
 		void setFov(float fov);
 
-		void genMVP(mat4x4 mvp, mat4x4 m) const;
+		mat4x4 genMVP(mat4x4 m) const;
 
 	};
 }

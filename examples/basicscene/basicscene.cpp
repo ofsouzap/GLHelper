@@ -2,6 +2,8 @@
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
+#include <glm/mat4x4.hpp>
+#include <glm/ext/matrix_transform.hpp>
 
 #include <stdio.h>
 
@@ -12,6 +14,7 @@
 #include "Texture.h"
 
 using namespace GLHelper;
+using glm::mat4x4;
 
 Camera* camera; // Declared here so can be used in key callback
 
@@ -193,10 +196,8 @@ int main()
 
 		// Create modelling matrix
 
-		mat4x4 m;
-
-		mat4x4_identity(m);
-		mat4x4_rotate_Y(m, m, time);
+		mat4x4 m = glm::identity<mat4x4>();
+		m = glm::rotate(m, (float)time, glm::vec3(0, 1, 0));
 
 		// Draw object
 		obj.draw(m, camera);

@@ -56,19 +56,17 @@ void SceneObject::draw(mat4x4 m, Camera* camera) const
 
 	// Calculate MVP matrix
 
-	mat4x4 mvp;
-	camera->genMVP(mvp, m);
+	mat4x4 mvp = camera->genMVP(m);
 
 	// Calculate normal transformation matrix
 
 	mat4x4 normM;
-	mat4x4_invert(normM, m);
-	mat4x4_transpose(normM, normM);
+	normM = glm::transpose(glm::inverse(m));
 
 	// Enable shader program and provide matrices
 
 	shader->useProgram();
-	shader->setUniformMat4x4("mvp", (const GLfloat*)mvp);
+	shader->setUniformMat4x4("mvp", &mvp[0][0]);
 
 	// Bind texture if provided
 

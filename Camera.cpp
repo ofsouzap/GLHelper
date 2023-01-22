@@ -43,7 +43,7 @@ void Camera::setFov(float fov)
 	this->fov = fov;
 }
 
-void Camera::genMVP(mat4x4 mvp, mat4x4 m) const
+mat4x4 Camera::genMVP(mat4x4 m) const
 {
 
 	// View matrix
@@ -51,22 +51,22 @@ void Camera::genMVP(mat4x4 mvp, mat4x4 m) const
 	mat4x4 v;
 	mat4x4 vRot, vPos;
 
-	mat4x4_translate(vPos, -camera_position.x, -camera_position.y, -camera_position.z);
+	vPos = glm::identity<mat4x4>();
+	vPos = glm::translate(vPos, glm::vec3(-camera_position.x, -camera_position.y, -camera_position.z));
 
-	mat4x4_identity(vRot);
-	mat4x4_rotate_X(vRot, vRot, camera_angles.polar);
-	mat4x4_rotate_Y(vRot, vRot, camera_angles.azimuthal);
+	vRot = glm::identity<mat4x4>();
+	vRot = glm::rotate(vRot, camera_angles.polar, glm::vec3(1, 0, 0));
+	vRot = glm::rotate(vRot, camera_angles.azimuthal, glm::vec3(0, 1, 0));
 
-	mat4x4_mul(v, vRot, vPos);
+	v = vRot * vPos;
 
 	// Projection matrix
 
 	mat4x4 p;
-	mat4x4_perspective(p, fov, aspectRatio, 0.1f, 100.f);
+	p = glm::perspective(fov, aspectRatio, 0.1f, 100.f);
 
-	// Combine
+	// Combine and return
 
-	mat4x4_mul(mvp, v, m);
-	mat4x4_mul(mvp, p, mvp);
+	return p * v * m;
 
 }

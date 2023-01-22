@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-#include <linmath.h>
 #include <glad/gl.h>
 
 #include "FileReader.h"

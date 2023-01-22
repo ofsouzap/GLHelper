@@ -1,11 +1,13 @@
 #pragma once
 
 #include <glad/gl.h>
-#include <linmath.h>
+#include <glm/mat4x4.hpp>
 
 #include "ShaderProgram.h"
 #include "Texture.h"
 #include "Camera.h"
+
+using glm::mat4x4;
 
 namespace GLHelper
 {
