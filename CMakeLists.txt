@@ -1,6 +1,22 @@
 # Learning source for some stuff: http://www.opengl-tutorial.org/beginners-tutorials
 
-add_library ("GLHelper" "SceneObject.h" "SceneObject.cpp" "ShaderProgram.h" "ShaderProgram.cpp" "FileReader.h" "FileReader.cpp" "ImageReader.h" "ImageReader.cpp" "Texture.h" "Texture.cpp" "ImageData.h" "Camera.h" "Camera.cpp" "ModelReader.h" "ModelReader.cpp")
+add_library ("GLHelper"
+	"SceneObject.h"
+	"SceneObject.cpp"
+	"ShaderProgram.h"
+	"ShaderProgram.cpp"
+	"FileReader.h"
+	"FileReader.cpp"
+	"Texture.h"
+	"Texture.cpp"
+	"ImageData.h"
+	"ImageData.cpp"
+	"Camera.h"
+	"Camera.cpp"
+	"ModelReader.h"
+	"ModelReader.cpp"
+	"stb_image.h" # Downloaded from https://github.com/nothings/stb/blob/master/stb_image.h
+ )
 target_link_libraries ("GLHelper" "glm")
 
 # Building examples

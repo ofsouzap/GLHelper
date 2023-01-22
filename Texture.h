@@ -5,7 +5,6 @@
 #include <glad/gl.h>
 
 #include "ImageData.h"
-#include "ImageReader.h"
 
 using std::string;
 

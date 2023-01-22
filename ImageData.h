@@ -1,11 +1,15 @@
 #pragma once
 
+#include <string>
+
+using std::string;
+
 namespace GLHelper
 {
 	class ImageData
 	{
 
-		typedef unsigned int dimension_t;
+		typedef int dimension_t;
 		typedef unsigned char* data_t;
 
 	private:
@@ -16,7 +20,8 @@ namespace GLHelper
 
 	public:
 
-		ImageData(unsigned int width, unsigned int height, unsigned char* data) : width(width), height(height), data(data) { }
+		ImageData(string filename);
+		~ImageData();
 
 		dimension_t getWidth() const { return width; }
 		dimension_t getHeight() const { return height; }

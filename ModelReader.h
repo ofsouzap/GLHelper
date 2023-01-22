@@ -2,14 +2,16 @@
 
 #include <string>
 #include <vector>
+#include <exception>
 
 #include <glad/gl.h>
 
-#include "FileReader.h"
 #include "SceneObject.h"
+#include "FileReader.h"
 
 using std::string;
 using std::vector;
+using std::exception;
 
 namespace GLHelper
 {
