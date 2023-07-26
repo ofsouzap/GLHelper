@@ -60,13 +60,21 @@ void SceneObject::draw(mat4x4 m, Camera* camera) const
 
 	// Calculate normal transformation matrix
 
-	mat4x4 normM;
-	normM = glm::transpose(glm::inverse(m));
+	mat3x3 m3 = mat3x3(m);
+	mat3x3 norm_m3 = glm::transpose(glm::inverse(m));
+	mat4x4 norm_m = mat4x4(norm_m3);
 
 	// Enable shader program and provide matrices
 
 	shader->useProgram();
+	shader->setUniformMat4x4("m", &m[0][0]);
 	shader->setUniformMat4x4("mvp", &mvp[0][0]);
+	shader->setUniformMat4x4("norm_m", &norm_m[0][0]);
+
+	// Provide shader program other uniforms
+
+	vec3 camera_pos = camera->getPosition();
+	shader->setUniformVec3("wc_camera_pos", &camera_pos[0]);
 
 	// Bind texture if provided
 

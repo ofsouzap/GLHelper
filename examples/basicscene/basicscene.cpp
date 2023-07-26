@@ -154,6 +154,7 @@ int main()
 	SceneObject obj(&shader, vertexCount);
 	obj.addAttrib("oc_pos", GL_FLOAT, sizeof(GLfloat), 3, objPos);
 	obj.addAttrib("uv", GL_FLOAT, sizeof(GLfloat), 2, objUV);
+	obj.addAttrib("oc_norm", GL_FLOAT, sizeof(GLfloat), 3, objNorm);
 	obj.setTexture(texture);
 
 #pragma endregion

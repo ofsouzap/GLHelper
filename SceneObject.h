@@ -2,12 +2,16 @@
 
 #include <glad/gl.h>
 #include <glm/mat4x4.hpp>
+#include <glm/mat3x3.hpp>
+#include <glm/vec3.hpp>
 
 #include "ShaderProgram.h"
 #include "Texture.h"
 #include "Camera.h"
 
 using glm::mat4x4;
+using glm::mat3x3;
+using glm::vec3;
 
 namespace GLHelper
 {
