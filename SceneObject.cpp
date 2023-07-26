@@ -51,6 +51,11 @@ void SceneObject::addAttrib(string name, GLenum type, GLint componentSize, GLint
 
 }
 
+const ShaderProgram* SceneObject::getShaderProgram() const
+{
+	return shader;
+}
+
 void SceneObject::draw(mat4x4 m, Camera* camera) const
 {
 

@@ -3,6 +3,7 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/mat4x4.hpp>
+#include <glm/vec3.hpp>
 #include <glm/ext/matrix_transform.hpp>
 
 #include <stdio.h>
@@ -15,8 +16,11 @@
 
 using namespace GLHelper;
 using glm::mat4x4;
+using glm::vec3;
 
-Camera* camera; // Declared here so can be used in key callback
+// Declared here so can be used in key callback
+Camera* camera;
+vec3 light_pos;
 
 #pragma region Logging
 
@@ -74,6 +78,37 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 	{
 		// Increase FOV
 		camera->changeFov(M_PI / 24.f);
+	}
+
+	else if (key == GLFW_KEY_I && action == GLFW_PRESS)
+	{
+		// Move forward
+		light_pos = light_pos + vec3(0.0, 0.0, -1.0);
+	}
+	else if (key == GLFW_KEY_K && action == GLFW_PRESS)
+	{
+		// Move backward
+		light_pos = light_pos + vec3(0.0, 0.0, 1.0);
+	}
+	else if (key == GLFW_KEY_L && action == GLFW_PRESS)
+	{
+		// Move right
+		light_pos = light_pos + vec3(1.0, 0.0, 0.0);
+	}
+	else if (key == GLFW_KEY_J && action == GLFW_PRESS)
+	{
+		// Move left
+		light_pos = light_pos + vec3(-1.0, 0.0, 0.0);
+	}
+	else if (key == GLFW_KEY_O && action == GLFW_PRESS)
+	{
+		// Move up
+		light_pos = light_pos + vec3(0.0, 1.0, 0.0);
+	}
+	else if (key == GLFW_KEY_U && action == GLFW_PRESS)
+	{
+		// Move down
+		light_pos = light_pos + vec3(0.0, -1.0, 0.0);
 	}
 
 }
@@ -134,6 +169,9 @@ int main()
 	camera = new Camera(window_aspect_ratio, M_PI / 4.f);
 	camera->setPosition({ 0.f, 0.f, 5.f });
 
+	// Create light position
+	light_pos = { 5.0, 5.0, 5.0 };
+
 #pragma region Create object
 
 	// Load model
@@ -175,6 +213,11 @@ int main()
 
 		mat4x4 m = glm::identity<mat4x4>();
 		m = glm::rotate(m, (float)time, glm::vec3(0, 1, 0));
+
+		// In order to supply my own values to the shader, I have to get the shader from the object and do this manually
+		const ShaderProgram* shader = obj.getShaderProgram();
+		shader->useProgram();
+		shader->setUniformVec3("wc_light_pos", &light_pos[0]);
 
 		// Draw object
 		obj.draw(m, camera);

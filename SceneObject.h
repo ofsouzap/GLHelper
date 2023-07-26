@@ -45,6 +45,8 @@ namespace GLHelper
 		/// <param name="data">A pointer to the data itself</param>
 		void addAttrib(string name, GLenum type, GLint componentSize, GLint components, const void* data, GLenum usage = GL_STATIC_DRAW) const;
 
+		const ShaderProgram* getShaderProgram() const;
+
 		void draw(mat4x4 m, Camera* camera) const;
 
 	};
