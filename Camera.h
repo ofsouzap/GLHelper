@@ -2,9 +2,12 @@
 
 #include <glad/gl.h>
 #include <glm/mat4x4.hpp>
+#include <glm/vec3.hpp>
+#include <glm/ext/vector_common.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 
+using glm::vec3;
 using glm::mat4x4;
 
 namespace GLHelper
@@ -13,10 +16,6 @@ namespace GLHelper
 	{
 
 	public:
-		struct position
-		{
-			float x, y, z;
-		};
 		struct angles
 		{
 			float polar, azimuthal;
@@ -26,7 +25,7 @@ namespace GLHelper
 
 		float aspectRatio;
 
-		position camera_position;
+		vec3 camera_position;
 		angles camera_angles;
 		float fov;
 
@@ -34,11 +33,11 @@ namespace GLHelper
 
 		Camera(float aspectRatio, float fov);
 
-		position getPosition() const;
+		vec3 getPosition() const;
 		angles getAngles() const;
 		float getFov() const;
 
-		void setPosition(position pos);
+		void setPosition(vec3 pos);
 		void setAngles(angles as);
 		void setFov(float fov);
 

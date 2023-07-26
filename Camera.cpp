@@ -13,7 +13,7 @@ Camera::Camera(float aspectRatio, float fov)
 
 }
 
-Camera::position Camera::getPosition() const
+vec3 Camera::getPosition() const
 {
 	return camera_position;
 }
@@ -28,7 +28,7 @@ float Camera::getFov() const
 	return fov;
 }
 
-void Camera::setPosition(position pos)
+void Camera::setPosition(vec3 pos)
 {
 	camera_position = pos;
 }
@@ -52,7 +52,7 @@ mat4x4 Camera::genMVP(mat4x4 m) const
 	mat4x4 vRot, vPos;
 
 	vPos = glm::identity<mat4x4>();
-	vPos = glm::translate(vPos, glm::vec3(-camera_position.x, -camera_position.y, -camera_position.z));
+	vPos = glm::translate(vPos, -1.0f * camera_position);
 
 	vRot = glm::identity<mat4x4>();
 	vRot = glm::rotate(vRot, camera_angles.polar, glm::vec3(1, 0, 0));
