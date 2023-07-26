@@ -1,2 +1,4 @@
+- have properties of mesh (eg. oc_pos, oc_norm, uv) given to shaders automatically by library
+- normal map functionality built-in
 - Change to loading images with 4 components instead of 3 (for more flexibility) then change code to expect 4, not 3, components
 - Improve model reader or (probably better) find a library to do it instead
