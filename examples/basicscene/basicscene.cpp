@@ -38,66 +38,42 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 	if (key == GLFW_KEY_E && action == GLFW_PRESS)
 	{
 		// Move up
-		camera->setPosition({
-			camera->getPosition().x,
-			camera->getPosition().y + 1,
-			camera->getPosition().z
-			});
+		camera->changePosition({0.0, 1.0, 0.0});
 	}
 	else if (key == GLFW_KEY_Q && action == GLFW_PRESS)
 	{
 		// Move down
-		camera->setPosition({
-			camera->getPosition().x,
-			camera->getPosition().y - 1,
-			camera->getPosition().z
-			});
+		camera->changePosition({0.0, -1.0, 0.0});
 	}
 	else if (key == GLFW_KEY_A && action == GLFW_PRESS)
 	{
 		// Move right
-		camera->setPosition({
-			camera->getPosition().x - 1,
-			camera->getPosition().y,
-			camera->getPosition().z
-			});
+		camera->changePosition({-1.0, 0.0, 0.0});
 	}
 	else if (key == GLFW_KEY_D && action == GLFW_PRESS)
 	{
 		// Move left
-		camera->setPosition({
-			camera->getPosition().x + 1,
-			camera->getPosition().y,
-			camera->getPosition().z
-			});
+		camera->changePosition({1.0, 0.0, 0.0});
 	}
 	else if (key == GLFW_KEY_S && action == GLFW_PRESS)
 	{
 		// Move back
-		camera->setPosition({
-			camera->getPosition().x,
-			camera->getPosition().y,
-			camera->getPosition().z + 1
-			});
+		camera->changePosition({0.0, 0.0, 1.0});
 	}
 	else if (key == GLFW_KEY_W && action == GLFW_PRESS)
 	{
 		// Move forward
-		camera->setPosition({
-			camera->getPosition().x,
-			camera->getPosition().y,
-			camera->getPosition().z - 1
-			});
+		camera->changePosition({0.0, 0.0, -1.0});
 	}
 	else if (key == GLFW_KEY_Z && action == GLFW_PRESS)
 	{
 		// Decrease FOV
-		camera->setFov(camera->getFov() - (M_PI / 24.f));
+		camera->changeFov(-(M_PI / 24.f));
 	}
 	else if (key == GLFW_KEY_C && action == GLFW_PRESS)
 	{
 		// Increase FOV
-		camera->setFov(camera->getFov() + (M_PI / 24.f));
+		camera->changeFov(M_PI / 24.f);
 	}
 
 }

@@ -3,7 +3,6 @@
 #include <glad/gl.h>
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
-#include <glm/ext/vector_common.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 
@@ -40,6 +39,9 @@ namespace GLHelper
 		void setPosition(vec3 pos);
 		void setAngles(angles as);
 		void setFov(float fov);
+
+		void changePosition(vec3 v);
+		void changeFov(float x);
 
 		mat4x4 genMVP(mat4x4 m) const;
 

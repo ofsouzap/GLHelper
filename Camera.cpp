@@ -43,6 +43,16 @@ void Camera::setFov(float fov)
 	this->fov = fov;
 }
 
+void Camera::changePosition(vec3 v)
+{
+	camera_position = camera_position + v;
+}
+
+void Camera::changeFov(float x)
+{
+	fov += x;
+}
+
 mat4x4 Camera::genMVP(mat4x4 m) const
 {
 
